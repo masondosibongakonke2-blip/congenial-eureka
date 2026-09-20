@@ -1,5 +1,5 @@
 # The Pure Hybrid System: Spatio-Temporal Analytics Engine
-**Author:** Independent Football Analyst  
+**Author:** Independent Football Analyst Sibongakonke Masondo 
 **Location:** South Africa  
 **License:** MIT  
 
