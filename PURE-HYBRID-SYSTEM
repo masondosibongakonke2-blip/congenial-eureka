@@ -1,0 +1,106 @@
+"""
+Pure Hybrid System: Tactical Geometry & Spatio-Temporal Spacing Framework
+Author: Independent Football Analyst
+Country: South Africa
+License: MIT
+Description: Quantifies cognitive shadow mechanics, relational chaos pocket densities, 
+             multi-angle swarm closure velocities, and weak-side isolation leverage.
+"""
+
+import numpy as np
+import json
+from typing import List, Dict, Any
+
+class PureHybridAnalyticEngine:
+    def __init__(self, pitch_length: float = 105.0, pitch_width: float = 68.0):
+        self.pitch_length = pitch_length
+        self.pitch_width = pitch_width
+
+    def cognitive_shadow_compliance(
+        self, defender_pos: np.ndarray, attacker_pos: np.ndarray, target_distance: float = 1.5, tolerance: float = 0.3
+    ) -> Dict[str, Any]:
+        distance = np.linalg.norm(defender_pos - attacker_pos)
+        deviation = distance - target_distance
+        in_shadow_band = abs(deviation) <= tolerance
+        return {
+            "metric": "Cognitive Shadow",
+            "distance_m": float(round(distance, 2)),
+            "target_m": target_distance,
+            "in_shadow_band": bool(in_shadow_band),
+            "deviation_m": float(round(deviation, 2)),
+            "status": "COMPLIANT" if in_shadow_band else ("TOO_LOOSE" if deviation > 0 else "TOO_AGGRESSIVE")
+        }
+
+    def chaos_pocket_density(
+        self, player_positions: List[np.ndarray], pocket_center: np.ndarray, radius: float = 7.5
+    ) -> Dict[str, Any]:
+        player_arr = np.array(player_positions)
+        if player_arr.size == 0:
+            return {"players_in_pocket": 0, "density_per_m2": 0.0}
+        distances = np.linalg.norm(player_arr - pocket_center, axis=1)
+        count = int(np.sum(distances <= radius))
+        area = np.pi * (radius ** 2)
+        density = count / area
+        return {
+            "metric": "Relational Chaos Density",
+            "players_in_pocket": count,
+            "pocket_radius_m": radius,
+            "density_per_m2": float(round(density, 4)),
+            "overload_achieved": count >= 4
+        }
+
+    def swarm_closure_simulation(
+        self, swarm_start_positions: List[np.ndarray], target_pos: np.ndarray, avg_sprint_speed: float = 6.5
+    ) -> Dict[str, Any]:
+        swarm_arr = np.array(swarm_start_positions)
+        if swarm_arr.size == 0:
+            return {"closure_time_s": 0.0, "meets_2_5s_target": False}
+        distances = np.linalg.norm(swarm_arr - target_pos, axis=1)
+        times = distances / avg_sprint_speed
+        max_time = float(np.max(times))
+        min_time = float(np.min(times))
+        return {
+            "metric": "Hounddog Swarm Closure",
+            "individual_times_s": [float(round(t, 2)) for t in times],
+            "trap_snap_time_s": float(round(max_time, 2)),
+            "first_contender_time_s": float(round(min_time, 2)),
+            "target_threshold_s": 2.5,
+            "meets_2_5s_target": max_time <= 2.5
+        }
+
+    def weak_side_isolation(
+        self, winger_pos: np.ndarray, nearest_defender_pos: np.ndarray, isolation_threshold: float = 5.0
+    ) -> Dict[str, Any]:
+        isolation_distance = np.linalg.norm(winger_pos - nearest_defender_pos)
+        return {
+            "metric": "Weak-Side Isolation",
+            "isolation_distance_m": float(round(isolation_distance, 2)),
+            "high_leverage_1v1": bool(isolation_distance >= isolation_threshold),
+            "exploitation_readiness": "HIGH" if isolation_distance >= 7.0 else ("OPTIMAL" if isolation_distance >= 5.0 else "SUB_OPTIMAL")
+        }
+
+if __name__ == "__main__":
+    engine = PureHybridAnalyticEngine()
+    print("================================================================")
+    print("PURE HYBRID SYSTEM: SPATIO-TEMPORAL TESTING INFRASTRUCTURE")
+    print("================================================================\n")
+    
+    mock_defender = np.array([35.2, 22.1])
+    mock_playmaker = np.array([36.5, 22.8])
+    shadow_result = engine.cognitive_shadow_compliance(mock_defender, mock_playmaker)
+    print(f"1. [{shadow_result['metric']}] -> {json.dumps(shadow_result, indent=2)}")
+    
+    mock_overload_pocket = np.array([12.0, 45.0])
+    mock_attackers = [np.array([11.5, 43.8]), np.array([13.1, 46.2]), np.array([12.2, 44.5]), np.array([10.8, 45.9])]
+    chaos_result = engine.chaos_pocket_density(mock_attackers, mock_overload_pocket)
+    print(f"\n2. [{chaos_result['metric']}] -> {json.dumps(chaos_result, indent=2)}")
+    
+    mock_swarm_unit = [np.array([45.0, 12.0]), np.array([49.5, 15.2]), np.array([42.1, 18.5]), np.array([51.0, 10.0])]
+    mock_ball_carrier = np.array([47.0, 14.0])
+    swarm_result = engine.swarm_closure_simulation(mock_swarm_unit, mock_ball_carrier)
+    print(f"\n3. [{swarm_result['metric']}] -> {json.dumps(swarm_result, indent=2)}")
+    
+    mock_isolated_winger = np.array([85.0, 60.0])
+    mock_shifting_fullback = np.array([76.5, 58.0])
+    isolation_result = engine.weak_side_isolation(mock_isolated_winger, mock_shifting_fullback)
+    print(f"\n4. [{isolation_result['metric']}] -> {json.dumps(isolation_result, indent=2)}")
